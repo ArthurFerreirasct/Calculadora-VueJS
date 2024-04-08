@@ -3,30 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Vue.js</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <title>Calculadora com Vue.js</title>
+    <style>
+        /* Estilos aqui */
+    </style>
 </head>
 <body>
     <div id="app">
-        <h1>Calculadora Vue.js</h1>
-        <input type="text" v-model="expression" @keydown.enter="calculate">
-        <button @click="calculate">Calcular</button>
-        <p>{{ result }}</p>
+        <h1>Gustavo Neitzke</h1>
+        <div class="calculadora">
+            <h1>Calculadora</h1>
+            <p id="resultado">{{ resultado }}</p>
+            <table>
+                <!-- Botões aqui -->
+            </table>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
         new Vue({
             el: '#app',
             data: {
-                expression: '',
-                result: ''
+                resultado: ''
             },
             methods: {
-                calculate: function() {
+                insert(num) {
+                    this.resultado += num;
+                },
+                clean() {
+                    this.resultado = '';
+                },
+                back() {
+                    this.resultado = this.resultado.substring(0, this.resultado.length - 1);
+                },
+                calcular() {
                     try {
-                        this.result = eval(this.expression);
-                    } catch(error) {
-                        this.result = 'Erro na expressão';
+                        this.resultado = eval(this.resultado);
+                    } catch (error) {
+                        this.resultado = 'Erro';
                     }
                 }
             }
